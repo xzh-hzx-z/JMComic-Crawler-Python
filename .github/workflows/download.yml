@@ -16,6 +16,13 @@ jobs:
       JM_USERNAME: ${{ secrets.JM_USERNAME }}
       JM_PASSWORD: ${{ secrets.JM_PASSWORD }}
 
+      # 下载目标：本子 / 章节 ID。三项都不填时，push 触发会因「未配置任何本子或章节 ID」直接失败。
+      # 填法（Settings → Secrets and variables → Actions → Variables 新建，或存为 Secret 亦可）：
+      #   JM_ALBUM_IDS = 12345-67890   多个本子 id 用 - 分隔（会按换行解析）
+      #   JM_PHOTO_IDS = 111111        单独下载章节时用，可选
+      JM_ALBUM_IDS: ${{ vars.JM_ALBUM_IDS || secrets.JM_ALBUM_IDS }}
+      JM_PHOTO_IDS: ${{ vars.JM_PHOTO_IDS || secrets.JM_PHOTO_IDS }}
+
       # 邮件相关secrets
       EMAIL_FROM: ${{ secrets.EMAIL_FROM }}
       EMAIL_TO: ${{ secrets.EMAIL_TO }}
